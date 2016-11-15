@@ -65,6 +65,14 @@ a.btn {
 // Alternate buttons
 // --------------------------------------------------
 
+.btn-dark {
+  @include button-variant-light(map-get($cores, cinza3), map-get($cores, petroleo), transparent );
+}
+
+.btn-laranja {
+  @include button-variant-light(map-get($cores, branco), map-get($cores, laranja), transparent );
+}
+
 .btn-default {
   @include button-variant($btn-default-color, $btn-default-bg, $btn-default-border);
 }

@@ -9,6 +9,11 @@ if ($_SERVER['SERVER_NAME'] == "server"){
 	
 	define ("BASE","\\\\server\\web\\thegarage\\");
 	define ("SITE", "http://server/thegarage/");
+
+} elseif ($_SERVER['SERVER_NAME'] == "localhost") {
+
+	define ("BASE","/var/www/html/thegarage/");
+	define ("SITE", "http://localhost/thegarage/");
 		
 } else {
 	

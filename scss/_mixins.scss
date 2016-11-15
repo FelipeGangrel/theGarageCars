@@ -16,8 +16,22 @@
     }
 }
 
-@mixin btn-flat ($color: null, $font-size: null, $padding: null) {
+@mixin link ($color: null, $modo: null){
+    color: $color;
+    @include transition(all .3s ease-in-out);
+    @if ($modo == 'escuro'){
+        &:hover{
+            color: darken($color, 10%);
+        }
+    }
+    @else{
+        &:hover{
+            color: lighten($color, 10%);
+        }
+    }
+}
 
+@mixin btn-flat ($color: null, $font-size: null, $padding: null) {
     border-style: solid;
     border-width: 3px;
     border-color: $color;

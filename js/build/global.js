@@ -5,7 +5,6 @@ $(document).on('ready', function(){
     
     console.log(`Ready to rock em ${site}`);
 
-
     // Mascaras
 
     $('[data-mask="cep"]').mask('99999-999');
@@ -46,7 +45,15 @@ $(document).on('ready', function(){
       allowPageScroll:"vertical"
     });
 
+    // busca
 
+    $('ul.busca-opcoes li a').on('click', function(event){
+        event.preventDefault();
+        valor = $(this).data('value');
+        element = $(this).data('bind');
+        $('[data-element='+element+']').text(valor);
+        $('input#'+element).val(valor);
+    });
 
 
     // Mensagens ao usuário

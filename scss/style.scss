@@ -1,26 +1,9 @@
+@import 'variables';
 @import "bootstrap";
 @import "carouselFade";
 @import "bourbon/bourbon";
 @import "mediaQueries";
 @import "mixins";
-
-
-$cores: (
-    petroleo: #263238,
-    petroleo2: #212c31,
-    laranja: #f57f17,
-    branco: #ffffff,
-    gelo: #fafafa,
-    cinza: #eeeeee,
-    cinza2: #a3a6a8,
-    cinza3: #858585
-);
-
-$pesos: (
-    regular: 400,
-    bold: 700,
-    black: 900
-);
 
 
 .container{	margin: 0 auto; width: 100%; }
@@ -37,18 +20,153 @@ html, body {
     color: cor(cinza3);
 }
 
+//Global
+
+a, a:hover{ text-decoration: none }
+input:focus{
+    outline: none;
+}
 
 nav#navbar-principal{
     $navAltura: 70px;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 100;
+    
+    .linha-principal{
+        background-color: cor(petroleo);
+        text-transform: uppercase;
+        font-weight: peso(bold);
+        .wrapper{
+            position: relative;
+            height: $navAltura;
+            line-height: $navAltura;
 
-    background-color: cor(petroleo);
-    height: $navAltura;
-    line-height: $navAltura;
+            div.login-area{
+                position: absolute;
+                width: 200px;
+                a{
+                    @include link(cor(laranja), 'claro');
+                }
+            }
 
-    > .wrapper{
-       position: relative;
-       .login-area{
-           
-       }
+            div.menu-area{
+                margin: 0 130px 0 200px;
+                div.menu-toggle, div.menu{
+                    display: inline-block;
+                }
+                div.menu-toggle{
+                    width: 50px;
+                    background-color: cor(petroleo3);
+                    text-align: center;
+                    display: none;
+                    @include bp-992{
+                        display: block;
+                    }
+                }
+                div.menu{
+                    @include bp-992{
+                        display: none;
+                    }
+
+                    ul.menu{
+                        li {
+                            display: inline-block;
+                            margin: 0 10px;
+                            a{
+                                @include link(cor(cinza3), 'claro');
+                            }
+                        }
+                    }
+                }
+            }
+
+            div.logo-area{
+                position: absolute;
+                right: 0;
+                top: 0;      
+                width: 130px;
+            }
+
+        }
     }
+
+    .linha-busca{
+        background-color: cor(petroleo2);
+        font-size: 14px;
+        font-weight: bold;
+        .wrapper{
+            position: relative;
+            padding: 20px 0 10px 0;
+
+            .campos{
+
+                @include bp-768{
+                    margin-bottom: 20px;
+                }
+
+                input[type="text"]{
+                    position: relative;
+                    height: 33px;
+                    background-color: cor(petroleo);
+                    border-color: cor(petroleo3);
+                    color: cor(cinza3);
+                    @include placeholder{
+                        color: cor(cinza3);
+                    }
+                }
+                .opcao-texto{
+                    position: absolute;
+                    right: 34px;
+                    top: 0;
+                    height: 33px;
+                    line-height: 33px;
+                    display: block;
+                    z-index: 3;
+                    padding: 0 10px;
+                    background-color: cor(petroleo);
+                    border: 1px solid cor(petroleo3);
+                    border-right: none;
+                }
+                .input-group-btn{
+                    button{
+                        border-color: cor(petroleo3) !important;
+                    }
+                    ul.dropdown-menu{
+                        background-color: cor(petroleo);
+                        li {
+                            a {
+                                color: cor(cinza3);
+                                &:hover{
+                                    background-color: cor(petroleo2);
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+
+            .botoes{
+                ul{
+                    li {
+                        display: inline-block;
+                        &:not(:last-child){
+                            margin-right: 10px;
+                        }
+                        a{
+                            color: cor(cinza3);
+                            text-decoration: underline;
+                        }
+                    }
+                }
+            }
+
+        }
+    }
+
+}
+
+main{
+    margin-top: 140px;
 }
