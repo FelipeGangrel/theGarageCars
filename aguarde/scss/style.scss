@@ -1,0 +1,223 @@
+// @import "bootstrap-sprockets";
+@import "bootstrap";
+@import "bourbon/bourbon";
+
+@import "custom/media-queries";
+@import "custom/carouselFade";
+@import "custom/mixins";
+@import "gridColumnCarousel";
+@import "sweetalert";
+// @import "monthly";
+@import "lity";
+@import "tabs";
+
+
+// CORES
+
+$branco: #ffffff;
+$laranja: #f57f17;
+
+// FONTE
+
+$fonte-titulo: "Roboto Condensed";
+$fonte-texto: "Lato";
+
+
+// BASE
+
+.container{	margin: 0 auto; width: 100%; }
+
+.container-fluid{ padding: 0; }
+
+.w1170{ max-width: 1170px; }
+.w1110{ max-width: 1110px; }
+.w768{ max-width: 768px; }
+.w640{ max-width: 640px; }
+.w480{ max-width: 480px; }
+.w990{ max-width: 990px; }
+
+// ESTILOS
+html, body{
+	background-color: #FFF;
+	font-family: $fonte-texto, sans-serif;
+	color: $branco;
+	font-size: 10px;
+	margin: 0 auto;
+
+}
+
+body{
+	overflow-x: none;
+
+	.ie-only{
+		display: none;
+	}
+
+	&.ie{
+		.ie-hide{
+			display: none;
+		}
+		.ie-only{
+			display: block;
+		}
+	}
+}
+
+// @mixin fonte-alternativa {
+// 	font-family: 'Roboto Condensed', sans-serif;
+// }
+
+main {
+	display: block;
+	width: 100%;
+	margin: 0 auto;
+
+	section#index-topo {
+		display: block;
+		background: url('../img/bg.jpg') no-repeat top center;
+		background-size: cover;
+		height: 710px;
+		padding-top: 200px;
+
+		div#logo {
+			display: block;
+			width: 392px;
+			height: 140px;
+			background: url('../img/logo.png') no-repeat center center;
+			margin: 0 auto 30px auto;
+		}
+
+		p.chamada {
+			display: block;
+			width: 60%;
+			text-align: center; 
+			font-size: 2rem;
+			margin: 0 auto 70px auto;
+			color: $branco;
+		}
+
+		div.desenvolvimento {
+			width: 220px;
+			margin: 0 auto 130px auto;
+			background-color: $laranja;
+			font-size: 1.4rem;
+			text-transform: uppercase;
+			text-align: center;
+			padding: 8px 0;
+		}
+
+		p.contato {
+			display: block;
+			width: 80%;
+			text-align: center; 
+			text-transform: uppercase;
+			font-size: 1.4rem;
+			margin: 0 auto;
+			color: $branco;
+		}
+	}
+
+	section#mapa {
+		position: relative;
+		display: block;
+		width: 100;
+		height: 470px;	
+
+		div#endereco {
+			display: block;
+			position: absolute;
+			bottom: 0;
+			left: 20%;
+			z-index: 99;
+			width: 265px;
+			padding: 20px 30px;
+			background-color: $laranja;
+
+			h1 {
+				font-size: 2em;
+				text-transform: uppercase;
+				margin-bottom: 15px;
+			}
+
+			p {
+				font-size: 1.4em;
+			}
+		}
+	}
+
+	section#endereco-full {
+		display: none;
+		width: 100%;
+		background-color: $laranja;
+		padding: 20px 30px;
+
+		h1 {
+			font-size: 2.5em;
+			text-transform: uppercase;
+			margin-bottom: 10px;
+		}
+
+		p {
+			font-size: 2em;
+		}
+	}
+}
+//media-query
+
+@include bp-992 {
+	html, body{
+		font-size: 9px;
+	}
+} 	
+
+@include bp-768 {
+	html, body{
+		font-size: 8px;
+	}
+} 	
+
+@include bp-430 {
+	main {
+		section#index-topo {
+			padding-top: 100px;
+			height: 550px;
+
+			div#logo {
+				display: block;
+				width: 280px;
+				height: 100px;
+				background: url('../img/logo-menor.png') no-repeat center center;
+				margin: 0 auto 30px auto;
+			}
+
+			div.desenvolvimento {
+				margin: 0 auto 70px auto;
+			}
+		}
+
+		section#mapa {
+			div#endereco {
+				display: none;
+			}
+		}
+
+		section#endereco-full {
+			display: block;
+		}
+	}			
+}
+
+@include bp-1400-up {
+	main {
+		section#index-topo {
+			p.chamada {
+				width: 40%;
+			}
+		}
+	}
+}
+// IE 8
+
+body.ie.ie8{
+
+}

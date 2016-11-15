@@ -1,0 +1,60 @@
+@mixin placeholder {
+    &::-webkit-input-placeholder {
+        @content;
+    }
+
+    &:-moz-placeholder { /* Firefox 18- */
+        @content;
+    }
+
+    &::-moz-placeholder {  /* Firefox 19+ */
+        @content;
+    }
+
+    &:-ms-input-placeholder {
+        @content;
+    }
+}
+
+@mixin btn-flat ($color: null, $font-size: null, $padding: null) {
+
+    border-style: solid;
+    border-width: 3px;
+    border-color: $color;
+    border-radius: 0;
+    padding: $padding !important;
+    text-decoration: none;
+    font-weight: 700;
+    color: $color !important;
+    background-color: transparent;
+    font-size: $font-size;
+    @include transition(all, .5s, ease-in-out);
+    &:hover, &:focus{
+        background-color: rgba($color, .1);
+        text-decoration: none !important;
+    }
+}
+
+@mixin text-no-overflow {
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+
+@function cor($key) {
+  @if map-has-key($cores, $key) {
+    @return map-get($cores, $key);
+  }
+
+  @warn "Non ecziste o daemon `#{$key}` no grimorio de $cores.";
+  @return null;
+}
+
+@function peso($key) {
+  @if map-has-key($pesos, $key) {
+    @return map-get($pesos, $key);
+  }
+
+  @warn "Non ecziste o daemon `#{$key}` no grimorio de $pesos.";
+  @return null;
+}

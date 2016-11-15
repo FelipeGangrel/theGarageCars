@@ -1,0 +1,6 @@
+aguarde/node_modules/
+
+node_modules/
+Thumbs.db
+.sass-cache/
+*.map.css

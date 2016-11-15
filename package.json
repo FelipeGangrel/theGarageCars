@@ -1,0 +1,20 @@
+{
+  "name": "nome-do-projeto",
+  "version": "1.0.0",
+  "description": "descrição aqui",
+  "main": "",
+  "devDependencies": {
+    "gulp": "*",
+    "gulp-sass": "*",
+    "gulp-clean-css": "*",
+    "gulp-concat": "*",
+    "gulp-rename": "*",
+    "gulp-uglify": "*",
+    "gulp-less": "*",
+    "gulp-plumber": "*",
+    "gulp-babel": "*",
+    "babel-preset-es2015": "*"
+  },
+  "author": "",
+  "license": "ISC"
+}

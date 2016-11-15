@@ -1,0 +1,58 @@
+.grid-column-carousel {
+  overflow: hidden;
+  position: relative;
+  margin: 0 -15px;
+}
+
+.grid-column-carousel-list {
+  transform: translateX(0);
+  -webkit-transform: translateX(0);
+  transition: transform 0.5s ease-in-out;
+  -webkit-transition: -webkit-transform 0.5s ease-in-out;
+  padding: 0 15px;
+
+  //clearfix styling
+  &:after, &:before {
+    content: ' '; /* 1 */
+    display: table; /* 2 */
+  }
+  &:after {
+    clear: both;
+  }
+
+  &.initialized {
+    width: 9999px;
+
+    > * {
+      display: block;
+    }
+  }
+
+  > * {
+    display: none;
+  }
+
+  [data-gcc-ignore] {
+    display: none;
+  }
+
+
+}
+
+.grid-column-carousel-indicators{
+  background-color: red;
+  position: absolute;
+  bottom: 0px;
+  z-index: 999;
+  left: 0;
+  width: 100%;
+  height: 10px;
+  display: none;
+
+    li{
+      background-color: white;
+      width: 10px; height: 10px;
+      margin: 0 10px;
+      display: inline-block;
+    }
+}
