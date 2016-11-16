@@ -4,7 +4,7 @@
   <!-- Logo -->
   <a href="<?siteRoot();?>" target="_blank" class="logo">
     <span class="logo-mini">ADM</span>
-    <span class="logo-lg"><img src="<?dashRoot();?>img/logo.png" alt=""></span>
+    <span class="logo-lg">The Garage Cars</span>
   </a>
 
   <!-- Header Navbar -->

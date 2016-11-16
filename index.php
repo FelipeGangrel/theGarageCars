@@ -1,7 +1,7 @@
 <?
   include 'conn/conn.php';
-  include 'inc/funcoes.php';
-  include 'inc/detecta-mobile.php';
+  include('inc/funcoes.php');
+  include('inc/detecta-mobile.php');
 ?>
 
 <!DOCTYPE html>

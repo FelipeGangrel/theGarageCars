@@ -1,8 +1,24 @@
 $(function () {
 
   $(".chosen-select").chosen();
+
+
   $('.datepicker').datepicker({
     language: 'pt-BR'
+  });
+
+  // input text alternativo para selects
+
+  $('select').on('change', function(){
+    valor = $(this).val();
+
+    if(valor=='selectAlternativa'){
+      console.log('meh meh');
+      $(this).siblings('.select-alternativa').removeClass('hidden').focus();
+    }else{
+      $(this).siblings('.select-alternativa').addClass('hidden');
+    }
+
   });
   
   //Tradução dos datatables
