@@ -4,13 +4,16 @@ if (basename($_SERVER["PHP_SELF"]) == "conn.php") {
 } 
 if ($_SERVER['SERVER_NAME'] == "server"){
 	
-	$db_name = "diocesevr";
+	$db_name = "thegarage";
 	$conexao = mysql_connect("server", "foco", "foco");
 	
 	define ("BASE","\\\\server\\web\\thegarage\\");
 	define ("SITE", "http://server/thegarage/");
 
 } elseif ($_SERVER['SERVER_NAME'] == "localhost") {
+
+	$db_name = "thegarage";
+	$conexao = mysql_connect("server", "foco", "foco");
 
 	define ("BASE","/var/www/html/thegarage/");
 	define ("SITE", "http://localhost/thegarage/");
