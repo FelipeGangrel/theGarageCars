@@ -61,7 +61,7 @@ switch ($alert) {
                 <select name="fabricante" id="fabricante" class="chosen-select form-control">
                     <option value="">Selecione</option>
                     <?
-                        $sql = mysql_query("SELECT * FROM ".DBPREF."carro_fabricante AS fab JOIN ".DBPREF."carro_modelo AS model ON (fab.FAB_ID = model.FAB_ID) GROUP BY fab.FAB_ID ");
+                        $sql = mysql_query("SELECT * FROM ".DBPREF."carro_fabricante ");
                         while($fabricante = mysql_fetch_array($sql)):
                             $fabricanteId = $fabricante['FAB_ID'];
                             $fabricanteNome = utf8_encode($fabricante['FAB_NOME']);
@@ -107,17 +107,17 @@ switch ($alert) {
 
 <?  include_once('../../inc/footer.php'); ?>
 <script>
-  $(document).ready(function(){
+  $(function(){
 
-      $dados = ['item1','item2','item3'];
+      // $dados = ['item1','item2','item3'];
 
-      $("#nome").typeahead({
-        'source': $dados
-      });
+      // $("#nome").typeahead({
+      //   'source': $dados
+      // });
 
-        // $.get('ajax-modelos.php', function(data){
-        //     $("#nome").typeahead({ source:data });
-        // },'json');
+        $.get('ajax-modelos.php', function(data){
+            $("#nome").typeahead({ source:data });
+        },'json');
 
 
   });
