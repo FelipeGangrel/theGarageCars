@@ -4,15 +4,15 @@
     include_once('../../inc/header.php');
     include_once('../../inc/sidebar.php');
 
-$edit = false;
-if($_GET['c']){
-  $cod = (int) $_GET['c'];
-  $sql = mysql_query("SELECT CAT_NOME FROM ".DB_PREFIX."categoria WHERE CAT_ID = $cod")or(die(mysql_error()));
-    $categoria = mysql_fetch_array($sql);
-      $categoriacod = $cod;
-      $categoriaNome = utf8_encode($categoria['CAT_NOME']);
-  $edit = true;
-}
+// $edit = false;
+// if($_GET['c']){
+//   $cod = (int) $_GET['c'];
+//   $sql = mysql_query("SELECT CAT_NOME FROM ".DB_PREFIX."categoria WHERE CAT_ID = $cod")or(die(mysql_error()));
+//     $categoria = mysql_fetch_array($sql);
+//       $categoriacod = $cod;
+//       $categoriaNome = utf8_encode($categoria['CAT_NOME']);
+//   $edit = true;
+// }
 
 
 
@@ -50,33 +50,32 @@ switch ($alert) {
         <div class="box">
 
           <div class="box-body">
-            <form action="e-categoria.php" method="post" data-toggle="validator" role="form">
+            <form action="e-carro.php" method="post" data-toggle="validator" role="form">
 
             <input type="hidden" name="edit" value="<? echo $edit ?>">
-            <input type="hidden" name="categoria" value="<? echo $categoriacod ?>">
             
             
             <div class="row">
                 <div class="col-md-6 form-group">
-                <label for="fabricante">Fabricante</label>
-                <select name="fabricante" id="fabricante" class="chosen-select form-control">
-                    <option value="">Selecione</option>
-                    <?
-                        $sql = mysql_query("SELECT * FROM ".DBPREF."carro_fabricante AS fab JOIN ".DBPREF."carro_modelo AS model ON (fab.FAB_ID = model.FAB_ID) GROUP BY fab.FAB_ID ");
-                        while($fabricante = mysql_fetch_array($sql)):
-                            $fabricanteId = $fabricante['FAB_ID'];
-                            $fabricanteNome = utf8_encode($fabricante['FAB_NOME']);
-                    ?>
+                    <label for="fabricante">Fabricante</label>
+                    <select name="fabricante" id="fabricante" class="chosen-select form-control">
+                        <option value="">Selecione</option>
+                        <?
+                            $sql = mysql_query("SELECT * FROM ".DBPREF."carro_fabricante AS fab JOIN ".DBPREF."carro_modelo AS model ON (fab.FAB_ID = model.FAB_ID) GROUP BY fab.FAB_ID ");
+                            while($fabricante = mysql_fetch_array($sql)):
+                                $fabricanteId = $fabricante['FAB_ID'];
+                                $fabricanteNome = utf8_encode($fabricante['FAB_NOME']);
+                        ?>
 
-                    <option value="<? echo $fabricanteId ?>"><? echo $fabricanteNome ?></option>
+                        <option value="<? echo $fabricanteId ?>"><? echo $fabricanteNome ?></option>
 
-                    <? endwhile; ?>
-                </select>
+                        <? endwhile; ?>
+                    </select>
                 </div>
 
                 <div class="col-md-6 form-group">
                     <label for="modelo">Modelo</label>
-                    <select name="modelo" id="modelo" class="form-control"></select>
+                    <select name="modelo" id="modelo" class="chosen-select form-control"></select>
                 </div>
                 
             </div>
@@ -91,7 +90,7 @@ switch ($alert) {
 
                 <div class="col-md-4 form-group">
                     <label for="kilometragem">Kilometragem</label>
-                    <input type="number" name="kilometragem" id="kilometragem" min="1" class="form-control">
+                    <input type="number" name="kilometragem" id="kilometragem" min="0" class="form-control">
                 </div>
 
                 <div class="col-md-6 form-group com-select-alternativa ">
@@ -123,7 +122,7 @@ switch ($alert) {
                         <? 
                             $sql = mysql_query("SELECT * FROM ".DBPREF."cambio ");
                             while($cambio = mysql_fetch_array($sql)):
-                                $cambioId = $cambio['COM_ID'];
+                                $cambioId = $cambio['CAM_ID'];
                                 $cambioNome = utf8_encode($cambio['CAM_NOME']);
                         ?>
 
@@ -176,14 +175,6 @@ switch ($alert) {
 
     var $selectModelo = $('select#modelo');
 
-    $('label').on('click', function(){
-        console.log('limpando');
-        $('select#modelo option').each(function(){
-            $(this).remove();
-        });
-        $selectModelo.chosen();
-    });
-
     $('select#fabricante').on('change', function(){
 
         var fabId = $(this).val();
@@ -197,39 +188,37 @@ switch ($alert) {
 
         // Povoando Select
 
-
-        $.ajax({
-            'url': 'ajax-modelos.php?fabricante='+fabId,
-            'method': 'GET'
-        }).done(function(data){
-            dados = JSON.parse(data);
-            $.each(dados, function(index, item){
-                console.log(item.nome);
-                option = '<option value='+item.id+'>'+item.nome+'</option>';
-                $selectModelo.append(option);
+        if(fabId){
+            $.ajax({
+                'url': 'ajax-modelos.php?fabricante='+fabId,
+                'method': 'GET'
+            }).done(function(data){
+                dados = JSON.parse(data);
+                $.each(dados, function(index, item){
+                    option = '<option value='+item.id+'>'+item.nome+'</option>';
+                    $selectModelo.append(option);
+                    $selectModelo.trigger("chosen:updated");
+                });
             });
-            $selectModelo.chosen();
-        });
-        
-
+        }
 
     });
 
-    $('button.remover-categoria').on('click', function(){
-        url = $(this).data('url');
+    // $('button.remover-categoria').on('click', function(){
+    //     url = $(this).data('url');
       
-        swal({
-          title: "Tem certeza?",
-          text: "O registro será removido permanentemente!",
-          showCancelButton: true,
-          confirmButtonText: "Sim, remova o registro!",
-          closeOnConfirm: true 
-        },function(){
-          location.href = url;
-        });
+    //     swal({
+    //       title: "Tem certeza?",
+    //       text: "O registro será removido permanentemente!",
+    //       showCancelButton: true,
+    //       confirmButtonText: "Sim, remova o registro!",
+    //       closeOnConfirm: true 
+    //     },function(){
+    //       location.href = url;
+    //     });
 
-        return false;
-    });
+    //     return false;
+    // });
 
       
   });

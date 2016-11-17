@@ -5,10 +5,12 @@
           Desenvolvido por <a href="http://www.fococomunicacao.com.br" target="_blank">Foco Comunicação</a>
         </div>
         <!-- Default to the left -->
-        <strong>Copyright &copy; 2016 <a href="<?siteRoot();?>" target="_blank">Carol Rizzo</a>.</strong> Todos os direitos reservados.
+        <strong>Copyright &copy; <? echo date('Y') ?> <a href="<?siteRoot();?>" target="_blank">The Garage Cars</a>.</strong> Todos os direitos reservados.
       </footer>
 
     </div><!-- ./wrapper -->
+
+    <? include '../../../conn/close.php'; ?>
 
     <!-- REQUIRED JS SCRIPTS -->
 
@@ -45,6 +47,8 @@
 
     <!-- Global -->
     <script src="<? dashRoot();?>dist/js/global.js"></script>
+
+
 
   </body>
 </html>

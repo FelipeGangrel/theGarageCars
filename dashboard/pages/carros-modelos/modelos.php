@@ -43,7 +43,7 @@ switch ($alert) {
 
             <div class="box-body">
 
-              <table id="dataTable" class="table table-nowrap table-bordered table-striped">
+              <table id="modelos" class="table table-nowrap table-bordered table-striped">
 
                 <thead>
                   <tr>
@@ -54,24 +54,13 @@ switch ($alert) {
                   </tr>
                 </thead>
 
-                 <tbody>
-                  <?  
-                  $sql = mysql_query("SELECT model.*, fab.FAB_NOME FROM ".DBPREF."carro_modelo AS model JOIN ".DBPREF."carro_fabricante AS fab ON (fab.FAB_ID = model.FAB_ID) ")or die(mysql_error());
-                  while($modelo = mysql_fetch_array($sql)):
-                    $modeloId = $modelo['MOD_ID'];
-                    $modeloNomeCompleto = utf8_encode($modelo['MOD_NOME_COMPLETO']);
-                    $modeloFabricante = utf8_encode($modelo['FAB_NOME']);
-                  ?>
-                  <tr>
-                    <td><? echo $modeloId ?></td>
-                    <td><? echo $modeloFabricante ?></td>
-                    <td><? echo $modeloNomeCompleto ?></td>
-                    <td>
-                       <a href="<?dashRoot();?>pages/carros-modelos/modelo.php?c=<? echo $modeloId ?>" class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i> Editar</a>
-                    </td>
-                  </tr>
-                  <? endwhile; ?>
-                 </tbody>
+                <thead class="hidden-md filter">
+                  <th></th>
+                  <th></th>
+                  <th></th>
+                  <th><button class="btn limpar-filtro btn-default btn-block" title="limpar filtros"><i class="fa fa-times"></i></button></th>
+                </thead>
+
 
               </table>
 
@@ -87,3 +76,70 @@ switch ($alert) {
 </div><!-- /.content-wrapper -->
 
 <?  include_once('../../inc/footer.php'); ?>
+<script>
+  $(function(){
+
+    var table = $('#modelos').DataTable({
+      'ajax': {
+        'url': 'ssp-modelos.php'
+      },
+      'order': [[1, 'asc']],
+      'pageLength': 25,
+      oLanguage: {
+         "sEmptyTable": "Nenhum registro encontrado",
+         "sInfo": "Mostrando de _START_ até _END_ de _TOTAL_ registros",
+         "sInfoEmpty": "Mostrando 0 até 0 de 0 registros",
+         "sInfoFiltered": "(Filtrados de _MAX_ registros)",
+         "sInfoPostFix": "",
+         "sInfoThousands": ".",
+         "sLengthMenu": "_MENU_ <span class='hidden-xs'>resultados por página</span>",
+         "sLoadingRecords": "Carregando...",
+         "sProcessing": "Processando...",
+         "sZeroRecords": "Nenhum registro encontrado",
+         "sSearch": "Pesquisar",
+         "oPaginate": {
+             "sNext": "Próximo",
+             "sPrevious": "Anterior",
+             "sFirst": "Primeiro",
+             "sLast": "Último"
+         },
+         "oAria": {
+             "sSortAscending": ": Ordenar colunas de forma ascendente",
+             "sSortDescending": ": Ordenar colunas de forma descendente"
+         }
+      },
+
+      initComplete: function () {
+
+        var colunasFiltro = [1];
+
+        $("#modelos thead.filter th").each( function ( i ) {
+
+          if(colunasFiltro.indexOf(i) != -1){ 
+
+            var select = $('<select class="select-filtro filtro-'+i+'" style="width:100%; padding: 5px; margin-right: -20px" ><option value="">Todos</option></select>')
+                .appendTo( $(this).empty() )
+                .on( 'change', function () {
+
+                    var val = $(this).val();
+
+                    table.column( i ) 
+                        .search( val ? '^'+$(this).val()+'$' : val, true, false )
+                        .draw();
+                } );
+
+            table.column( i ).data().unique().sort().each( function ( d, j ) {
+              select.addClass('form-control btn btn-block btn-default');
+                select.append( '<option value="'+d+'">'+d+'</option>' );
+            } );
+
+          } 
+        });
+
+      }
+
+    });
+
+
+  });
+</script>

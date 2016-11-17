@@ -1,6 +1,7 @@
 $(function () {
 
   $(".chosen-select").chosen();
+  $(".typeahead").typeahead();
 
 
   $('.datepicker').datepicker({

@@ -121,6 +121,14 @@ body.login-page{
 }
 
 
+thead.filter, tfoot.filter{
+  tr > th {
+    background-color: #f4f4f4;
+    padding: 0 !important;
+    padding-right: 0 !important;
+  }
+}
+
 .image-editor{
   .relative{
     position: relative;

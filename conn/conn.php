@@ -11,6 +11,13 @@ if ($_SERVER['SERVER_NAME'] == "server"){
 	define ("BASE","\\\\server\\web\\thegarage\\");
 	define ("SITE", "http://server/thegarage/");
 
+	$ssp = array(
+		'user'=> 'foco',
+		'password'=> 'foco',
+		'db'=> 'thegarage',
+		'server'=> 'server'
+	);
+
 } elseif ($_SERVER['SERVER_NAME'] == "localhost") {
 
 	$db_name = "thegarage";
@@ -18,6 +25,13 @@ if ($_SERVER['SERVER_NAME'] == "server"){
 
 	define ("BASE","/var/www/html/thegarage/");
 	define ("SITE", "http://localhost/thegarage/");
+
+	$ssp = array(
+		'user'=> 'foco',
+		'password'=> 'foco',
+		'db'=> 'thegarage',
+		'server'=> 'server'
+	);
 
 		
 } else {
